@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "STING": {
+      "commandName": "Executable",
+      "executablePath": "E:\\Program Files\\ArcGIS\\Pro\\bin\\ArcGISPro.exe"
+    }
+  }
+}
