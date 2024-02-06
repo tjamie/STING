@@ -15,7 +15,6 @@
     <Content Include="DarkImages\AddInDesktop16.png" />
     <Content Include="DarkImages\AddInDesktop32.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Reference Include="ArcGIS.Desktop.Framework">
       <HintPath>E:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>

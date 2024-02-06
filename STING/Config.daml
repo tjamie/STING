@@ -1,12 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArcGIS defaultAssembly="STING.dll"
-        defaultNamespace="STING"
-        xmlns="http://schemas.esri.com/DADF/Registry"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///E:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-
+﻿<ArcGIS defaultAssembly="STING.dll" defaultNamespace="STING" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///E:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   <AddInInfo id="{4c9af9dc-7c7d-4087-b1d5-d9b8823545b0}" version="1.0" desktopVersion="3.2.49743">
-    <Name>STING</Name>   
+    <Name>STING</Name>
     <Description>STING description</Description>
     <Image>Images\AddinDesktop32.png</Image>
     <Author>Taylor</Author>
@@ -16,7 +10,6 @@
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
   </AddInInfo>
-
   <modules>
     <insertModule id="STING_Module" className="Module1" autoLoad="false" caption="Module1">
       <!-- uncomment to have the control hosted on a separate tab-->
@@ -25,19 +18,20 @@
           <group refID="STING_Group1"/>
         </tab>-->
       </tabs>
-              
       <groups>
         <!-- comment this out if you have no controls on the Addin tab to avoid
               an empty group-->
-        <group id="STING_Group1" caption="Group 1" appearsOnAddInTab="true">
+        <group id="STING_Group1" caption="STING" appearsOnAddInTab="true">
           <!-- host controls within groups -->
+          <button refID="STING_NrcsButton" size="large" />
         </group>
       </groups>
-      
       <controls>
         <!-- add your controls here -->
-      </controls> 
-      
+        <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+      </controls>
     </insertModule>
   </modules>
 </ArcGIS>
