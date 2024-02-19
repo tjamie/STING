@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 */TestGdb.gdb/*
-*/TestConverter.cs
+*/*/TestConverter.cs
 # User-specific files
 *.rsuser
 *.suo
@@ -362,3 +362,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/STING/DataConversions/TestConverter.cs
