@@ -3,6 +3,8 @@ using Xunit;
 using STING;
 using STING.Services;
 using STING.Structs;
+using System.Reflection;
+using STING.DataConversions;
 
 namespace STING.Tests
 {

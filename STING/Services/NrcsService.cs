@@ -49,6 +49,7 @@ namespace STING.Services
             response.EnsureSuccessStatusCode();
             var xmlResponse = await response.Content.ReadAsStringAsync();
             Console.WriteLine(xmlResponse);
+            // Will eventually need to convert this to a shapefile. Aspose exists but isn't free.
             return xmlResponse;
             #endregion
         }
