@@ -1,25 +1,13 @@
-﻿using ArcGIS.Core.CIM;
-using ArcGIS.Core.Data;
-using ArcGIS.Core.Geometry;
-using ArcGIS.Desktop.Catalog;
-using ArcGIS.Desktop.Core;
-using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
-using ArcGIS.Desktop.Framework;
+﻿using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Layouts;
-using ArcGIS.Desktop.Mapping;
 using STING.DataConversions;
 using STING.Services;
 using STING.Structs;
-using System;
-using System.Collections.Generic;
+using STING.Prompts;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace STING
 {
@@ -27,32 +15,42 @@ namespace STING
     {
         protected override async void OnClick()
         {
+            // TODO apply standardized symbology to the resulting layer
+
             string testMsg = "NRCS button clicked";
             Debug.Print(testMsg);
-            //MessageBox.Show(testMsg, "Test");
 
-            string newClassName = "TestNrcs";
-
-            // Placeholder -- get location via map extent or project boundary shp
-            var coordsSW = new Coordinates(-77.662260f, 39.389419f);
-            var coordsNE = new Coordinates(-77.649369f, 39.396397f);
-            var boundingBox = new BoxCoordinates(coordsSW, coordsNE);
+            // Get timestamp and apply to feature class name
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string newClassName = $"NRCS_{timestamp}";
 
             // Placeholder -- eventually have user select gdb
-            var gdb = CoreModule.CurrentProject.DefaultGeodatabasePath;
+            var gdb_path = CoreModule.CurrentProject.DefaultGeodatabasePath;
 
-            // Start new NRCS service
-            Debug.Print("Starting NRCS Service");
-            var nrcsService = new NrcsService();
-            var xmlResponse = await nrcsService.GetSoilFeatures(boundingBox);
-            //string xmlResponse = "<?xml version='1.0' encoding=\"UTF-8\" ?>\r\n<wfs:FeatureCollection\r\n   xmlns:ms=\"http://mapserver.gis.umn.edu/mapserver\"\r\n   xmlns:wfs=\"http://www.opengis.net/wfs\"\r\n   xmlns:gml=\"http://www.opengis.net/gml\"\r\n   xmlns:ogc=\"http://www.opengis.net/ogc\"\r\n   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n   xsi:schemaLocation=\"http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd \r\n                       http://mapserver.gis.umn.edu/mapserver https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDMWGS84GEOGRAPHIC.wfs?SERVICE=WFS&amp;VERSION=1.1.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME=mapunitpoly&amp;OUTPUTFORMAT=XMLSCHEMA\">\r\n    <gml:boundedBy>\r\n        <gml:Box srsName=\"EPSG:4326\">\r\n            <gml:coordinates>38.496006,-77.377055 38.514938,-77.367582</gml:coordinates>\r\n        </gml:Box>\r\n    </gml:boundedBy>\r\n    <gml:featureMember>\r\n        <ms:mapunitpoly fid=\"mapunitpoly.120482\">\r\n            <gml:boundedBy>\r\n                <gml:Box srsName=\"EPSG:4326\">\r\n                    <gml:coordinates>38.507618,-77.377055 38.514938,-77.367902</gml:coordinates>\r\n                </gml:Box>\r\n            </gml:boundedBy>\r\n            <ms:multiPolygon>\r\n                <gml:MultiPolygon srsName=\"EPSG:4326\">\r\n                    <gml:polygonMember>\r\n                        <gml:Polygon>\r\n                            <gml:outerBoundaryIs>\r\n                                <gml:LinearRing>\r\n                                    <gml:coordinates>38.508767,-77.377019 38.508850,-77.377055 38.509208,-77.376810 38.509345,-77.376810 38.509703,-77.376601 38.510418,-77.376462 38.510528,-77.376008 38.510391,-77.375868 38.510363,-77.375624 38.510501,-77.375064 38.510501,-77.374147 38.510557,-77.373867 38.511053,-77.373310 38.511136,-77.372786 38.511219,-77.372611 38.511440,-77.372367 38.511852,-77.372194 38.512018,-77.371774 38.512212,-77.371706 38.512403,-77.371986 38.512401,-77.372929 38.512675,-77.373000 38.512869,-77.372617 38.512842,-77.372547 38.512980,-77.372302 38.512980,-77.371778 38.512845,-77.371218 38.512543,-77.370763 38.512516,-77.370518 38.512655,-77.370239 38.512847,-77.370205 38.512930,-77.370100 38.512903,-77.369575 38.513014,-77.369436 38.513042,-77.369261 38.513180,-77.369087 38.513455,-77.369089 38.513702,-77.368949 38.513922,-77.368950 38.514170,-77.368672 38.514308,-77.368637 38.514418,-77.368777 38.514472,-77.368882 38.514444,-77.368952 38.514086,-77.369544 38.513975,-77.369859 38.513974,-77.370174 38.514110,-77.371014 38.514301,-77.371538 38.514439,-77.371434 38.514549,-77.370910 38.514523,-77.370770 38.514413,-77.370525 38.514441,-77.370175 38.514717,-77.369687 38.514938,-77.369443 38.514883,-77.369129 38.514719,-77.368918 38.514776,-77.368219 38.514611,-77.368043 38.513870,-77.367902 38.513099,-77.368492 38.512824,-77.368526 38.512687,-77.368456 38.512465,-77.368734 38.512438,-77.368909 38.512547,-77.369365 38.512490,-77.369854 38.512270,-77.370063 38.512021,-77.370517 38.511829,-77.370515 38.511691,-77.370760 38.511526,-77.370794 38.511472,-77.370724 38.511473,-77.370200 38.511390,-77.370095 38.511281,-77.370094 38.510675,-77.370407 38.509932,-77.370997 38.509628,-77.371347 38.509381,-77.371520 38.509106,-77.371589 38.508169,-77.372180 38.507784,-77.372598 38.507618,-77.372947 38.507921,-77.372879 38.508389,-77.372425 38.508664,-77.372357 38.509104,-77.372008 38.509572,-77.371731 38.509820,-77.371662 38.510067,-77.371698 38.510205,-77.371558 38.510371,-77.371174 38.510482,-77.371035 38.511114,-77.370722 38.511224,-77.370863 38.511224,-77.370968 38.511031,-77.371141 38.510810,-77.371491 38.510671,-77.372260 38.510450,-77.372783 38.510283,-77.373447 38.510200,-77.373620 38.509704,-77.374249 38.509704,-77.374707 38.509758,-77.375134 38.509840,-77.375343 38.509813,-77.375483 38.509593,-77.375797 38.509235,-77.375972 38.508960,-77.376215 38.508822,-77.376495 38.508767,-77.377019 </gml:coordinates>\r\n                                </gml:LinearRing>\r\n                            </gml:outerBoundaryIs>\r\n                        </gml:Polygon>\r\n                    </gml:polygonMember>\r\n                </gml:MultiPolygon>\r\n            </ms:multiPolygon>\r\n            <ms:areasymbol>VA179</ms:areasymbol>\r\n            <ms:spatialversion>8</ms:spatialversion>\r\n            <ms:musym>AwE</ms:musym>\r\n            <ms:nationalmusym>41cj</ms:nationalmusym>\r\n            <ms:mukey>120482</ms:mukey>\r\n            <ms:muareaacres>30.13073878</ms:muareaacres>\r\n            <ms:AoiPartName></ms:AoiPartName>\r\n            <ms:mupolygonkey>324103818</ms:mupolygonkey>\r\n        </ms:mapunitpoly>\r\n    </gml:featureMember>\r\n    <gml:featureMember>\r\n        <ms:mapunitpoly fid=\"mapunitpoly.120528\">\r\n            <gml:boundedBy>\r\n                <gml:Box srsName=\"EPSG:4326\">\r\n                    <gml:coordinates>38.496006,-77.374128 38.512687,-77.367582</gml:coordinates>\r\n                </gml:Box>\r\n            </gml:boundedBy>\r\n            <ms:multiPolygon>\r\n                <gml:MultiPolygon srsName=\"EPSG:4326\">\r\n                    <gml:polygonMember>\r\n                        <gml:Polygon>\r\n                            <gml:outerBoundaryIs>\r\n                                <gml:LinearRing>\r\n                                    <gml:coordinates>38.505581,-77.374128 38.505691,-77.374128 38.505967,-77.373641 38.506243,-77.373326 38.506682,-77.373573 38.506874,-77.373783 38.507480,-77.373017 38.507618,-77.372947 38.507784,-77.372598 38.508169,-77.372180 38.509106,-77.371589 38.509381,-77.371520 38.509628,-77.371347 38.509932,-77.370997 38.510675,-77.370407 38.511281,-77.370094 38.511390,-77.370095 38.511473,-77.370200 38.511472,-77.370724 38.511526,-77.370794 38.511691,-77.370760 38.511829,-77.370515 38.511802,-77.370480 38.511886,-77.369886 38.511997,-77.369363 38.512135,-77.369223 38.512245,-77.369223 38.512438,-77.368909 38.512465,-77.368734 38.512687,-77.368456 38.512577,-77.368350 38.512495,-77.368106 38.512496,-77.367862 38.512413,-77.367826 38.512276,-77.367965 38.512193,-77.367930 38.511560,-77.368417 38.511285,-77.368451 38.511065,-77.368555 38.510872,-77.368728 38.510623,-77.369078 38.510348,-77.369147 38.510157,-77.368971 38.510157,-77.368901 38.509992,-77.368761 38.509854,-77.368830 38.509827,-77.368935 38.509827,-77.369074 38.509936,-77.369285 38.509936,-77.369529 38.509852,-77.369704 38.509660,-77.369913 38.508779,-77.370259 38.508420,-77.370783 38.508035,-77.371095 38.507567,-77.371303 38.507236,-77.371687 38.506907,-77.371721 38.506605,-77.371405 38.506387,-77.370706 38.506415,-77.370565 38.505976,-77.370040 38.505565,-77.369653 38.505429,-77.369233 38.504880,-77.368567 38.504634,-77.368111 38.503948,-77.367620 38.503261,-77.367582 38.502739,-77.367651 38.502217,-77.367893 38.501831,-77.367961 38.501694,-77.367961 38.501639,-77.367890 38.501474,-77.367891 38.501282,-77.367784 38.501034,-77.367888 38.500539,-77.367957 38.500457,-77.368062 38.500456,-77.368237 38.500676,-77.368482 38.500978,-77.368482 38.501721,-77.368206 38.501830,-77.368275 38.501968,-77.368137 38.502216,-77.368103 38.502628,-77.368243 38.502820,-77.368175 38.503013,-77.368000 38.503454,-77.367828 38.503646,-77.367828 38.504112,-77.368005 38.504304,-77.368250 38.504413,-77.368775 38.504824,-77.369266 38.504851,-77.369405 38.505097,-77.369861 38.505289,-77.370141 38.505782,-77.370633 38.506138,-77.371159 38.506466,-77.372174 38.506465,-77.372418 38.506273,-77.372488 38.505943,-77.372382 38.505888,-77.372312 38.505393,-77.372204 38.504900,-77.371993 38.504625,-77.371712 38.504571,-77.371362 38.504599,-77.371153 38.504462,-77.370977 38.504298,-77.370942 38.504077,-77.371256 38.504021,-77.371431 38.503856,-77.371604 38.503334,-77.371673 38.502949,-77.371601 38.502729,-77.371355 38.502485,-77.370376 38.502211,-77.369956 38.501800,-77.369674 38.501525,-77.369568 38.501113,-77.369602 38.500893,-77.369531 38.500536,-77.369250 38.500454,-77.369250 38.500371,-77.369355 38.500371,-77.369459 38.500480,-77.369599 38.501524,-77.370057 38.501715,-77.370198 38.502181,-77.370864 38.502263,-77.371074 38.502620,-77.371496 38.502619,-77.371635 38.502564,-77.371705 38.502042,-77.371808 38.501904,-77.371913 38.501683,-77.372261 38.501490,-77.372435 38.501077,-77.372608 38.500775,-77.372572 38.499824,-77.372038 38.499056,-77.371820 38.498645,-77.371572 38.497437,-77.371421 38.496997,-77.371486 38.496256,-77.371443 38.496007,-77.371755 38.496006,-77.371895 38.496088,-77.372001 38.496253,-77.372037 38.496336,-77.371968 38.496940,-77.371939 38.497324,-77.372152 38.497433,-77.372153 38.497488,-77.372224 38.498231,-77.371917 38.498642,-77.372165 38.498998,-77.372588 38.499218,-77.372416 38.499355,-77.372382 38.499766,-77.372560 38.499903,-77.372806 38.499847,-77.373120 38.499763,-77.373224 38.499845,-77.373399 38.499955,-77.373436 38.500066,-77.373296 38.500066,-77.373192 38.500131,-77.373164 38.500389,-77.373166 38.500582,-77.372991 38.500939,-77.372853 38.501214,-77.372854 38.501488,-77.373134 38.501681,-77.373135 38.501763,-77.372996 38.501764,-77.372646 38.501820,-77.372402 38.502014,-77.372123 38.502866,-77.372020 38.503003,-77.371952 38.503607,-77.371953 38.503965,-77.372025 38.504239,-77.372270 38.504651,-77.372482 38.504926,-77.372483 38.505200,-77.372588 38.505530,-77.372835 38.505667,-77.373010 38.505776,-77.373290 38.505720,-77.373604 38.505609,-77.373848 38.505581,-77.374128 </gml:coordinates>\r\n                                </gml:LinearRing>\r\n                            </gml:outerBoundaryIs>\r\n                        </gml:Polygon>\r\n                    </gml:polygonMember>\r\n                </gml:MultiPolygon>\r\n            </ms:multiPolygon>\r\n            <ms:areasymbol>VA179</ms:areasymbol>\r\n            <ms:spatialversion>8</ms:spatialversion>\r\n            <ms:musym>Iu</ms:musym>\r\n            <ms:nationalmusym>41f0</ms:nationalmusym>\r\n            <ms:mukey>120528</ms:mukey>\r\n            <ms:muareaacres>50.29032223</ms:muareaacres>\r\n            <ms:AoiPartName></ms:AoiPartName>\r\n            <ms:mupolygonkey>324108771</ms:mupolygonkey>\r\n        </ms:mapunitpoly>\r\n    </gml:featureMember>\r\n</wfs:FeatureCollection>";
+            // Get user to select envelope/boundary feature
+            var featureSelector = new FeatureSelector();
+            BoxCoordinates featureBoxCoordinates = await featureSelector.PromptForFeatureExtent();
 
-            // Attempt conversion
-            Debug.Print("Converting GML");
-            var gmlConverter = new GmlConverter();
-            gmlConverter.ToShp(xmlResponse, gdb, newClassName);
-            //var testConverter = new TestConverter();
-            //testConverter.ToShp(gdb, newClassName);
+            // Only continue if a valid extent has been selected
+            if (featureBoxCoordinates.IsNonzero())
+            {
+                // Start new NRCS service
+                Debug.Print("Starting NRCS Service");
+                var nrcsService = new NrcsService();
+                var xmlResponse = await nrcsService.GetSoilFeatures(featureBoxCoordinates);
+            
+                // Attempt conversion
+                Debug.Print("Converting GML");
+                var gmlConverter = new GmlConverter();
+                gmlConverter.ToShp(xmlResponse, gdb_path, newClassName);
+            }
+            else
+            {
+                await QueuedTask.Run(() =>
+                {
+                    MessageBox.Show("Invalid extent.", "Error");
+                });
+            }
         }
     }
 }

@@ -17,5 +17,8 @@ namespace STING.Structs
             this.longitude = longitude;
             this.latitude = latitude;
         }
+
+        static readonly Coordinates zeroCoordinates = new Coordinates(0.0f, 0.0f);
+        public static Coordinates Zero { get { return zeroCoordinates; } }
     }
 }

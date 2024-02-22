@@ -28,8 +28,8 @@
       </groups>
       <controls>
         <!-- add your controls here -->
-        <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
-          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Dino32">
+          <tooltip heading="NRCS">Get soils data from the USDA NRCS<disabledText /></tooltip>
         </button>
       </controls>
     </insertModule>
