@@ -42,7 +42,7 @@ namespace STING
                 // Attempt conversion
                 Debug.Print("Converting GML");
                 var gmlConverter = new GmlConverter();
-                gmlConverter.ToShp(xmlResponse, gdb_path, newClassName);
+                gmlConverter.ConvertToFeatureClass(xmlResponse, gdb_path, newClassName);
             }
             else
             {

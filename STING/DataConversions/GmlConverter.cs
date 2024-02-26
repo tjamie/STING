@@ -19,7 +19,7 @@ namespace STING.DataConversions
 {
     internal class GmlConverter
     {
-        internal async void ToShp(string xmlData, string geodatabasePath, string newFeatureClassName)
+        internal async void ConvertToFeatureClass(string xmlData, string geodatabasePath, string newFeatureClassName)
         {
             // parse xml
             XDocument xdoc = XDocument.Parse(xmlData);
