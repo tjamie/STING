@@ -24,12 +24,16 @@
         <group id="STING_Group1" caption="STING" appearsOnAddInTab="true">
           <!-- host controls within groups -->
           <button refID="STING_NrcsButton" size="large" />
+          <button refID="STING_FemaButton" size="large" />
         </group>
       </groups>
       <controls>
         <!-- add your controls here -->
         <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Dino32">
           <tooltip heading="NRCS">Get soils data from the USDA NRCS<disabledText /></tooltip>
+        </button>
+        <button id="STING_FemaButton" caption="FEMA" className="FemaButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="GenericButtonBlue32">
+          <tooltip heading="FEMA">Get floodplain data from FEMA's NFHL<disabledText /></tooltip>
         </button>
       </controls>
     </insertModule>
