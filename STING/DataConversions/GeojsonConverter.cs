@@ -80,6 +80,7 @@ namespace STING.DataConversions
                     foreach (var polygonCoordinatesArray in outerCoordinatesArray)
                     {
                         // Process coordinates to polygon here
+                        Debug.Print("Building polygon");
                         var enumerablePolygonCoordinatesArray = polygonCoordinatesArray.EnumerateArray();
                         var featurePolygon = CreatePolygonFromCoordinates(enumerablePolygonCoordinatesArray);
 
@@ -94,7 +95,10 @@ namespace STING.DataConversions
                                 if (properties.TryGetProperty(field, out JsonElement value))
                                 {
                                     // TODO refactor for non-string fields
-                                    rowBuffer[field] = value.ToString();
+                                    Debug.Print("Adding field");
+                                    // ArcGIS replaces "." in fields with "_", so fix field name here
+                                    string adjustedField = field.Replace('.', '_');
+                                    rowBuffer[adjustedField] = value.ToString();
                                 }
                             }
                         }
