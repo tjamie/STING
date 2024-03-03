@@ -5,7 +5,7 @@
     <Image>Images\AddinDesktop32.png</Image>
     <Author>Taylor</Author>
     <Company>Llamanaut</Company>
-    <Date>1/30/2024 19:15:34</Date>
+    <Date>2/15/2024 19:15:34</Date>
     <Subject>Framework</Subject>
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
@@ -14,14 +14,14 @@
     <insertModule id="STING_Module" className="Module1" autoLoad="false" caption="Module1">
       <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
-        <!--<tab id="STING_Tab1" caption="New Tab">
+        <tab id="STING_Tab1" caption="STING" keytip="ST">
           <group refID="STING_Group1"/>
-        </tab>-->
+        </tab>
       </tabs>
       <groups>
         <!-- comment this out if you have no controls on the Addin tab to avoid
               an empty group-->
-        <group id="STING_Group1" caption="STING" appearsOnAddInTab="true">
+        <group id="STING_Group1" caption="Government Geospatial Data" appearsOnAddInTab="false">
           <!-- host controls within groups -->
           <button refID="STING_NrcsButton" size="large" />
           <button refID="STING_FemaButton" size="large" />
@@ -31,7 +31,7 @@
       <controls>
         <!-- add your controls here -->
         <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Bessy32">
-          <tooltip heading="NRCS">Get soils data from the USDA NRCS<disabledText /></tooltip>
+          <tooltip heading="NRCS">Get soils data from the USDA NRCS (SSURGO database)<disabledText /></tooltip>
         </button>
         <button id="STING_FemaButton" caption="FEMA" className="FemaButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Rabbit32">
           <tooltip heading="FEMA">Get floodplain data from FEMA's NFHL<disabledText /></tooltip>
