@@ -37,12 +37,8 @@ namespace STING.Services
             string requestUrl = $@"{baseUrl}{geometryTypeString}{geometryString}{inSrString}{outSrString}{returnGeometryString}{fieldsString}{fString}";
 
             // Make HTTP GET request
-            // Note that FEMA responses can be absurdly large
-            // TODO make a general http class with error handling for unavailable connections etc
-            HttpClient httpClient = new();
-            using HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-            response.EnsureSuccessStatusCode();
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+            HttpService httpService = new();
+            var jsonResponse = await httpService.GetResponse(requestUrl, "FEMA Floodplains");
             return jsonResponse;
         }
     }

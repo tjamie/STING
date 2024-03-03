@@ -52,16 +52,20 @@ namespace STING
                 var nwiService = new NwiService();
                 var geojsonResponse = await nwiService.GetWetlandFeatures(featureBoxCoordinates);
 
-                // Define attribute fields to take from geojson
-                var attributeFields = new Dictionary<string, FieldType>
+                // Only continue if response not null
+                if (geojsonResponse != null)
                 {
-                    { @"Wetlands.ATTRIBUTE", FieldType.String },
-                    { @"Wetlands.WETLAND_TYPE", FieldType.String }
-                };
-                // Attempt conversion
-                Debug.Print("Converting geojson");
-                var geojsonConverter = new GeojsonConverter();
-                geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);
+                    // Define attribute fields to take from geojson
+                    var attributeFields = new Dictionary<string, FieldType>
+                    {
+                        { @"Wetlands.ATTRIBUTE", FieldType.String },
+                        { @"Wetlands.WETLAND_TYPE", FieldType.String }
+                    };
+                    // Attempt conversion
+                    Debug.Print("Converting geojson");
+                    var geojsonConverter = new GeojsonConverter();
+                    geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);
+                }
             }
             else
             {

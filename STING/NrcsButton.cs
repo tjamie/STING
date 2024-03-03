@@ -38,11 +38,14 @@ namespace STING
                 Debug.Print("Starting NRCS Service");
                 var nrcsService = new NrcsService();
                 var xmlResponse = await nrcsService.GetSoilFeatures(featureBoxCoordinates);
-            
-                // Attempt conversion
-                Debug.Print("Converting GML");
-                var gmlConverter = new GmlConverter();
-                gmlConverter.ConvertToFeatureClass(xmlResponse, gdb_path, newClassName);
+
+                if (xmlResponse != null)
+                {
+                    // Attempt conversion
+                    Debug.Print("Converting GML");
+                    var gmlConverter = new GmlConverter();
+                    gmlConverter.ConvertToFeatureClass(xmlResponse, gdb_path, newClassName);
+                }            
             }
             else
             {

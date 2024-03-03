@@ -52,17 +52,20 @@ namespace STING
                 var femaService = new FemaService();
                 var geojsonResponse = await femaService.GetFloodplainFeatures(featureBoxCoordinates);
 
-                // Define attribute fields to take from geojson
-                var attributeFields = new Dictionary<string, FieldType>
+                if (geojsonResponse != null)
                 {
-                    { "DFIRM_ID", FieldType.String },
-                    { "FLD_ZONE", FieldType.String },
-                    { "ZONE_SUBTY", FieldType.String }
-                };
-                // Attempt conversion
-                Debug.Print("Converting geojson");
-                var geojsonConverter = new GeojsonConverter();
-                geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);
+                    // Define attribute fields to take from geojson
+                    var attributeFields = new Dictionary<string, FieldType>
+                    {
+                        { "DFIRM_ID", FieldType.String },
+                        { "FLD_ZONE", FieldType.String },
+                        { "ZONE_SUBTY", FieldType.String }
+                    };
+                    // Attempt conversion
+                    Debug.Print("Converting geojson");
+                    var geojsonConverter = new GeojsonConverter();
+                    geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);
+                }
             }
             else
             {
