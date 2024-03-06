@@ -5,7 +5,7 @@
     <Image>Images\AddinDesktop32.png</Image>
     <Author>Taylor</Author>
     <Company>Llamanaut</Company>
-    <Date>2/15/2024 19:15:34</Date>
+    <Date>03/06/2024 18:00:00</Date>
     <Subject>Framework</Subject>
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
@@ -14,7 +14,7 @@
     <insertModule id="STING_Module" className="Module1" autoLoad="false" caption="Module1">
       <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
-        <tab id="STING_Tab1" caption="STING" keytip="ST">
+        <tab id="STING_Tab1" caption="STING 1.0.0" keytip="ST">
           <group refID="STING_Group1"/>
         </tab>
       </tabs>
