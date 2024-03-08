@@ -17,7 +17,7 @@ namespace STING.Services
     {
         readonly HttpClient httpClient = new();
 
-        internal async Task<string> GetResponse(string requestUrl, string sourceEntityName)
+        internal async Task<HttpResponseMessage> GetResponse(string requestUrl, string sourceEntityName)
         {
             httpClient.Timeout = TimeSpan.FromSeconds(30);
 
@@ -32,7 +32,7 @@ namespace STING.Services
 
             try
             {
-                using HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
+                HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
                 response.EnsureSuccessStatusCode();
 
                 // Get content length to calculate progress
@@ -67,7 +67,7 @@ namespace STING.Services
                 }
 
                 loadingWindow.Close();
-                return await response.Content.ReadAsStringAsync();
+                return response;
             }
             catch (Exception ex)
             {

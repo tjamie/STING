@@ -1,4 +1,5 @@
-﻿<ArcGIS defaultAssembly="STING.dll" defaultNamespace="STING" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///E:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArcGIS defaultAssembly="STING.dll" defaultNamespace="STING" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///E:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   <AddInInfo id="{4c9af9dc-7c7d-4087-b1d5-d9b8823545b0}" version="1.0" desktopVersion="3.2.49743">
     <Name>STING</Name>
     <Description>Spatial Tools for the Integration of Nature-related Geoprocessing</Description>
@@ -15,7 +16,7 @@
       <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
         <tab id="STING_Tab1" caption="STING 1.0.0" keytip="ST">
-          <group refID="STING_Group1"/>
+          <group refID="STING_Group1" />
         </tab>
       </tabs>
       <groups>

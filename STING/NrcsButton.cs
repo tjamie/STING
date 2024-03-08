@@ -45,7 +45,15 @@ namespace STING
                     Debug.Print("Converting GML");
                     var gmlConverter = new GmlConverter();
                     gmlConverter.ConvertToFeatureClass(xmlResponse, gdb_path, newClassName);
-                }            
+                }
+                // If response is not a geojson, service should respond with null
+                else
+                {
+                    await QueuedTask.Run(() =>
+                    {
+                        MessageBox.Show($"Server did not respond with vector data.\nThis is likely due to no USDA servers being available at the moment.", "Error");
+                    });
+                }
             }
             else
             {

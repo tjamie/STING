@@ -18,9 +18,8 @@ namespace STING.DataConversions
     {
         internal async void ConvertToFeatureClass(string jsonData, string geodatabasePath, string newFeatureClassName, Dictionary<string, FieldType> attributeFields)
         {
-            // Parse geojson
             var jsonDocument = JsonDocument.Parse(jsonData);
-            var jsonObject = jsonDocument.RootElement;
+            var jsonObject = jsonDocument.RootElement;         
 
             // Extract features array from geojson
             var featuresArray = jsonObject.GetProperty("features").EnumerateArray();

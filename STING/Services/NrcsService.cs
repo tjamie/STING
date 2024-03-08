@@ -41,17 +41,17 @@ namespace STING.Services
             string requestUrl = $@"{baseUrl}{serviceString}{versionString}{requestString}{typeString}{filterString}{srsString}{outputFormatString}";
             //string requestUrl = baseUrl + serviceString + versionString + requestString + typeString + filterString + srsString + outputFormatString;
 
-            //HttpClient httpClient = new();
-            //using HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-            //response.EnsureSuccessStatusCode();
-            //var xmlResponse = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine(xmlResponse);
-            //// Will eventually need to convert this to a shapefile. Aspose exists but isn't free.
-            //return xmlResponse;
-            // Send http request
             HttpService httpService = new();
-            var xmlResponse = await httpService.GetResponse(requestUrl, "SSURGO");
-            return xmlResponse;
+            var response = await httpService.GetResponse(requestUrl, "SSURGO");
+            if (response != null)
+            {
+                var xmlResponse = await response.Content.ReadAsStringAsync();
+                return xmlResponse;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

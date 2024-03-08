@@ -64,7 +64,15 @@ namespace STING
                     // Attempt conversion
                     Debug.Print("Converting geojson");
                     var geojsonConverter = new GeojsonConverter();
-                    geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);
+                    geojsonConverter.ConvertToFeatureClass(geojsonResponse, gdb_path, newClassName, attributeFields);                    
+                }
+                // If response is not a geojson, service should respond with null
+                else
+                {
+                    await QueuedTask.Run(() =>
+                    {
+                        MessageBox.Show($"Server did not respond with vector data.\nThis is likely due to no USFWS servers being available at the moment.", "Error");
+                    });
                 }
             }
             else

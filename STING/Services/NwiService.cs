@@ -38,8 +38,18 @@ namespace STING.Services
 
             // Make HTTP GET request
             HttpService httpService = new();
-            var jsonResponse = await httpService.GetResponse(requestUrl, "National Wetlands Inventory");
-            return jsonResponse;
+            var response = await httpService.GetResponse(requestUrl, "National Wetlands Inventory");
+            if (response != null &&
+                (response.Content.Headers.ContentType?.MediaType == "application/json"
+                || response.Content.Headers.ContentType?.MediaType == "application/geo+json"
+                || response.Content.Headers.ContentType?.MediaType == "application/geojson"))
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
