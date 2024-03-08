@@ -16,8 +16,11 @@ namespace STING.Services
     internal class HttpService
     {
         readonly HttpClient httpClient = new();
+
         internal async Task<string> GetResponse(string requestUrl, string sourceEntityName)
         {
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
+
             // Display loading window
             LoadingWindow loadingWindow = new LoadingWindow();
             loadingWindow.Owner = FrameworkApplication.Current.MainWindow;
