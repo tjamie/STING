@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="STING.dll" defaultNamespace="STING" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///E:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{4c9af9dc-7c7d-4087-b1d5-d9b8823545b0}" version="1.0" desktopVersion="3.2.49743">
+  <AddInInfo id="{4c9af9dc-7c7d-4087-b1d5-d9b8823545b0}" version="1.0.1" desktopVersion="3.2.49743">
     <Name>STING</Name>
     <Description>Spatial Tools for the Integration of Nature-related Geoprocessing</Description>
     <Image>Images\AddinDesktop32.png</Image>
     <Author>Taylor</Author>
     <Company>Llamanaut</Company>
-    <Date>03/06/2024 18:00:00</Date>
+    <Date>03/08/2024 00:00:00</Date>
     <Subject>Framework</Subject>
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
@@ -15,14 +15,14 @@
     <insertModule id="STING_Module" className="Module1" autoLoad="false" caption="Module1">
       <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
-        <tab id="STING_Tab1" caption="STING 1.0.0" keytip="ST">
+        <tab id="STING_Tab1" caption="STING 1.0.1" keytip="T">
           <group refID="STING_Group1" />
         </tab>
       </tabs>
       <groups>
         <!-- comment this out if you have no controls on the Addin tab to avoid
               an empty group-->
-        <group id="STING_Group1" caption="Government Geospatial Data" appearsOnAddInTab="false">
+        <group id="STING_Group1" caption="Government Geospatial Data" appearsOnAddInTab="false" keytip="G">
           <!-- host controls within groups -->
           <button refID="STING_NrcsButton" size="large" />
           <button refID="STING_FemaButton" size="large" />
@@ -31,13 +31,13 @@
       </groups>
       <controls>
         <!-- add your controls here -->
-        <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Bessy32">
+        <button id="STING_NrcsButton" caption="NRCS" className="NrcsButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Bessy32" keytip="N">
           <tooltip heading="NRCS">Get soils data from the USDA NRCS (SSURGO database)<disabledText /></tooltip>
         </button>
-        <button id="STING_FemaButton" caption="FEMA" className="FemaButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Rabbit32">
+        <button id="STING_FemaButton" caption="FEMA" className="FemaButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="Rabbit32" keytip="F">
           <tooltip heading="FEMA">Get floodplain data from FEMA's NFHL<disabledText /></tooltip>
         </button>
-        <button id="STING_NwiButton" caption="NWI" className="NwiButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="BexDog32">
+        <button id="STING_NwiButton" caption="NWI" className="NwiButton" loadOnClick="true" smallImage="GenericButtonBlue16" largeImage="BexDog32" keytip="W">
           <tooltip heading="NWI">Get wetland data from the USFWS<disabledText /></tooltip>
         </button>
       </controls>

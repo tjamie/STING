@@ -3,24 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STING", "STING\STING.csproj", "{6678E3D0-538B-458A-82AA-4867E4760604}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STING", "STING\STING.csproj", "{6678E3D0-538B-458A-82AA-4867E4760604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STING.Tests", "STING.Tests\STING.Tests.csproj", "{87285CD4-1DA4-4487-89A9-8545CB86F139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STING.Tests", "STING.Tests\STING.Tests.csproj", "{87285CD4-1DA4-4487-89A9-8545CB86F139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6678E3D0-538B-458A-82AA-4867E4760604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6678E3D0-538B-458A-82AA-4867E4760604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6678E3D0-538B-458A-82AA-4867E4760604}.Debug|x64.ActiveCfg = Debug|x64
+		{6678E3D0-538B-458A-82AA-4867E4760604}.Debug|x64.Build.0 = Debug|x64
 		{6678E3D0-538B-458A-82AA-4867E4760604}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6678E3D0-538B-458A-82AA-4867E4760604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6678E3D0-538B-458A-82AA-4867E4760604}.Release|x64.ActiveCfg = Release|x64
+		{6678E3D0-538B-458A-82AA-4867E4760604}.Release|x64.Build.0 = Release|x64
 		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Debug|x64.ActiveCfg = Debug|x64
+		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Debug|x64.Build.0 = Debug|x64
 		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Release|x64.ActiveCfg = Release|x64
+		{87285CD4-1DA4-4487-89A9-8545CB86F139}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
